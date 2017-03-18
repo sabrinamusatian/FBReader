@@ -25,7 +25,10 @@
 
 class MyTestView : public ZLTextView {
 public:
-	MyTestView(ZLPaintContext &context) : ZLTextView(context) {}
+	MyTestView(ZLPaintContext &context) 
+		: ZLTextView(context)
+		, myCaption("test") {}
+
 	virtual ~MyTestView() {}
 
 	virtual shared_ptr<ZLTextPositionIndicatorInfo> indicatorInfo() const { return NULL; }
@@ -37,7 +40,7 @@ public:
 	virtual int topMargin() const { return 10; }
 	virtual int bottomMargin() const { return 10; }
 
-	virtual const std::string &caption() const { return "test"; } 
+	virtual const std::string &caption() const { return myCaption; } 
 
 	virtual ZLColor backgroundColor() const { return ZLColor(0, 0, 0); }
 
@@ -45,4 +48,7 @@ public:
 	virtual shared_ptr<ZLTextStyle> baseStyle() const { return FBTextStyle::InstanceAsPtr(); }
 	virtual ZLColor color(const std::string &style = std::string()) const { return ZLColor(255, 255, 255); }
 	virtual bool isSelectionEnabled() const { return false; }
+
+private:
+	std::string myCaption;
 };
