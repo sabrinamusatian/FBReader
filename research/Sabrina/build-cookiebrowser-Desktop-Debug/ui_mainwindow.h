@@ -17,11 +17,8 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollArea>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "qwebengineview.h"
@@ -37,18 +34,13 @@ public:
     QVBoxLayout *verticalLayout;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
-    QLineEdit *m_urlLineEdit;
-    QPushButton *m_urlButton;
     QWebEngineView *m_webview;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout_2;
     QWidget *widget_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *m_newButton;
-    QPushButton *m_deleteAllButton;
-    QScrollArea *m_scrollArea;
+    QPushButton *SaveAll;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -76,19 +68,6 @@ public:
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        m_urlLineEdit = new QLineEdit(widget);
-        m_urlLineEdit->setObjectName(QStringLiteral("m_urlLineEdit"));
-
-        horizontalLayout->addWidget(m_urlLineEdit);
-
-        m_urlButton = new QPushButton(widget);
-        m_urlButton->setObjectName(QStringLiteral("m_urlButton"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/view-refresh.png"), QSize(), QIcon::Normal, QIcon::Off);
-        m_urlButton->setIcon(icon);
-
-        horizontalLayout->addWidget(m_urlButton);
-
 
         verticalLayout->addWidget(widget);
 
@@ -127,30 +106,13 @@ public:
 
         horizontalLayout_3->addWidget(label);
 
-        horizontalSpacer = new QSpacerItem(87, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        SaveAll = new QPushButton(widget_2);
+        SaveAll->setObjectName(QStringLiteral("SaveAll"));
 
-        horizontalLayout_3->addItem(horizontalSpacer);
-
-        m_newButton = new QPushButton(widget_2);
-        m_newButton->setObjectName(QStringLiteral("m_newButton"));
-
-        horizontalLayout_3->addWidget(m_newButton);
-
-        m_deleteAllButton = new QPushButton(widget_2);
-        m_deleteAllButton->setObjectName(QStringLiteral("m_deleteAllButton"));
-
-        horizontalLayout_3->addWidget(m_deleteAllButton);
+        horizontalLayout_3->addWidget(SaveAll);
 
 
         verticalLayout_2->addWidget(widget_2);
-
-        m_scrollArea = new QScrollArea(frame_2);
-        m_scrollArea->setObjectName(QStringLiteral("m_scrollArea"));
-        m_scrollArea->setMinimumSize(QSize(320, 0));
-        m_scrollArea->setMaximumSize(QSize(320, 16777215));
-        m_scrollArea->setWidgetResizable(true);
-
-        verticalLayout_2->addWidget(m_scrollArea);
 
 
         horizontalLayout_2->addWidget(frame_2);
@@ -158,7 +120,6 @@ public:
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
-        QObject::connect(m_urlLineEdit, SIGNAL(returnPressed()), m_urlButton, SLOT(click()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -166,10 +127,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Cookie Manager", Q_NULLPTR));
-        m_urlButton->setText(QString());
         label->setText(QApplication::translate("MainWindow", "Cookies:", Q_NULLPTR));
-        m_newButton->setText(QApplication::translate("MainWindow", "New", Q_NULLPTR));
-        m_deleteAllButton->setText(QApplication::translate("MainWindow", "SaveAll", Q_NULLPTR));
+        SaveAll->setText(QApplication::translate("MainWindow", "SaveAll", Q_NULLPTR));
     } // retranslateUi
 
 };

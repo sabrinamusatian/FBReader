@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../cookiebrowser/mainwindow.h"
+#include "../cookieUtility/mainwindow.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -20,76 +20,6 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_CookieDialog_t {
-    QByteArrayData data[1];
-    char stringdata0[13];
-};
-#define QT_MOC_LITERAL(idx, ofs, len) \
-    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_CookieDialog_t, stringdata0) + ofs \
-        - idx * sizeof(QByteArrayData)) \
-    )
-static const qt_meta_stringdata_CookieDialog_t qt_meta_stringdata_CookieDialog = {
-    {
-QT_MOC_LITERAL(0, 0, 12) // "CookieDialog"
-
-    },
-    "CookieDialog"
-};
-#undef QT_MOC_LITERAL
-
-static const uint qt_meta_data_CookieDialog[] = {
-
- // content:
-       7,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       0,    0, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
-
-       0        // eod
-};
-
-void CookieDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
-{
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
-    Q_UNUSED(_a);
-}
-
-const QMetaObject CookieDialog::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_CookieDialog.data,
-      qt_meta_data_CookieDialog,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
-};
-
-
-const QMetaObject *CookieDialog::metaObject() const
-{
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
-}
-
-void *CookieDialog::qt_metacast(const char *_clname)
-{
-    if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_CookieDialog.stringdata0))
-        return static_cast<void*>(const_cast< CookieDialog*>(this));
-    if (!strcmp(_clname, "Ui_CookieDialog"))
-        return static_cast< Ui_CookieDialog*>(const_cast< CookieDialog*>(this));
-    return QDialog::qt_metacast(_clname);
-}
-
-int CookieDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
-{
-    _id = QDialog::qt_metacall(_c, _id, _a);
-    if (_id < 0)
-        return _id;
-    return _id;
-}
 struct qt_meta_stringdata_CookieWidget_t {
     QByteArrayData data[4];
     char stringdata0[40];
@@ -216,8 +146,8 @@ void CookieWidget::viewClicked()
     QMetaObject::activate(this, &staticMetaObject, 1, Q_NULLPTR);
 }
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[8];
-    char stringdata0[109];
+    QByteArrayData data[6];
+    char stringdata0[73];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -231,14 +161,11 @@ QT_MOC_LITERAL(1, 11, 17), // "handleCookieAdded"
 QT_MOC_LITERAL(2, 29, 0), // ""
 QT_MOC_LITERAL(3, 30, 14), // "QNetworkCookie"
 QT_MOC_LITERAL(4, 45, 6), // "cookie"
-QT_MOC_LITERAL(5, 52, 22), // "handleDeleteAllClicked"
-QT_MOC_LITERAL(6, 75, 16), // "handleNewClicked"
-QT_MOC_LITERAL(7, 92, 16) // "handleUrlClicked"
+QT_MOC_LITERAL(5, 52, 20) // "handleSaveAllClicked"
 
     },
     "MainWindow\0handleCookieAdded\0\0"
-    "QNetworkCookie\0cookie\0handleDeleteAllClicked\0"
-    "handleNewClicked\0handleUrlClicked"
+    "QNetworkCookie\0cookie\0handleSaveAllClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -248,7 +175,7 @@ static const uint qt_meta_data_MainWindow[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -256,15 +183,11 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x08 /* Private */,
-       5,    0,   37,    2, 0x08 /* Private */,
-       6,    0,   38,    2, 0x08 /* Private */,
-       7,    0,   39,    2, 0x08 /* Private */,
+       1,    1,   24,    2, 0x08 /* Private */,
+       5,    0,   27,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -277,9 +200,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->handleCookieAdded((*reinterpret_cast< const QNetworkCookie(*)>(_a[1]))); break;
-        case 1: _t->handleDeleteAllClicked(); break;
-        case 2: _t->handleNewClicked(); break;
-        case 3: _t->handleUrlClicked(); break;
+        case 1: _t->handleSaveAllClicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -323,13 +244,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 2;
     }
     return _id;
 }

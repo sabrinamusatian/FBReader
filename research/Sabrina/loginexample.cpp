@@ -14,7 +14,7 @@ int main()
   curl_easy_setopt(myHandle, CURLOPT_AUTOREFERER, 1 );
   curl_easy_setopt(myHandle, CURLOPT_FOLLOWLOCATION, 1 );
 
-  std::ifstream fin("cookie.txt");
+  std::ifstream fin("build-cookiebrowser-Desktop-Debug/cookie.txt");
   std::string s;
   std::getline(fin, s);
 
