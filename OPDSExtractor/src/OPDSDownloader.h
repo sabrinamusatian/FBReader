@@ -9,6 +9,7 @@ public:
     OPDSDownloader();
     ~OPDSDownloader();
     std::string download();
+    void googleOAuth();
 private:
     CURL *curl;
 };

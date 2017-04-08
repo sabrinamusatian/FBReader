@@ -5,7 +5,7 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-
+#include <cstdlib>
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
     std::string data((const char*) ptr, (size_t) size * nmemb);
     *((std::stringstream*) stream) << data;
@@ -18,6 +18,10 @@ OPDSDownloader::OPDSDownloader() {
 
 OPDSDownloader::~OPDSDownloader() {
     curl_easy_cleanup(curl);
+}
+
+void OPDSDownloader::googleOAuth(){
+    std::system("cookieUtility/cookiebrowser");
 }
 
 std::string OPDSDownloader::download() {
