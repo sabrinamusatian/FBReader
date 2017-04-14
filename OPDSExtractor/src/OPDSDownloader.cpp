@@ -6,6 +6,9 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
+#include <stdio.h>
+#include <string.h>
+
 size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream) {
     std::string data((const char*) ptr, (size_t) size * nmemb);
     *((std::stringstream*) stream) << data;
@@ -24,31 +27,40 @@ void OPDSDownloader::googleOAuth(){
     std::system("cookieUtility/cookiebrowser");
 }
 
-std::string OPDSDownloader::download() {
+std::string OPDSDownloader::download(const std::string &url) {
     curl_easy_setopt(curl, CURLOPT_AUTOREFERER, 1 );
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1 );
 
-    std::ifstream fin("src/cookie.txt");
-    std::string s;
-    std::cout << s;
-    std::getline(fin, s);
-
-    curl_easy_setopt(curl, CURLOPT_COOKIE, s.c_str());
-    curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.");
- 
-    curl_easy_setopt(curl, CURLOPT_URL, "https://books.fbreader.org/opds");
-    
+    bool tried = false;
+    char* result_str;
     std::stringstream out;
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
+    do{
+        if (tried){
+            googleOAuth();
+        }
+        std::ifstream fin("src/cookie.txt");
+        std::string s;
+        std::getline(fin, s);
 
-    CURLcode res = curl_easy_perform(curl);
-    
-    /* Check for errors */
-    if (res != CURLE_OK) {
-        fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                curl_easy_strerror(res));
-    }
-    
+        curl_easy_setopt(curl, CURLOPT_COOKIE, s.c_str());
+        curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.");
+     
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &out);
+
+        CURLcode res = curl_easy_perform(curl);
+        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &result_str);
+        //std::cout << result_str;
+
+        /* Check for errors */
+        if (res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n",
+                    curl_easy_strerror(res));
+        }
+        tried = true;
+    }while(strcmp(url.c_str(), result_str) != 0);
+
     return out.str();
 }
