@@ -3,14 +3,18 @@
 
 #include <string>
 #include <curl/curl.h>
+#include <vector> 
+#include <utility> 
 
 class OPDSDownloader{
 public:
     OPDSDownloader();
     ~OPDSDownloader();
-    std::string download();
+    std::string download(const std::string &url);
+    void googleOAuth();
 private:
     CURL *curl;
+    std::vector <std::pair<std::string, std::string> > OPDS_tree;
 };
 
 #endif  /* OPDSDOWNLOADER_HPP */

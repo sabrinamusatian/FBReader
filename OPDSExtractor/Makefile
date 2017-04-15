@@ -11,6 +11,25 @@ target = example
 SUBDIRS = src
 
 all:
+	@for dir in $(ROOTDIR); do \
+		if [ -d $$dir ]; then \
+			cd $$dir; \
+			if ! $(MAKE); then \
+				exit 1; \
+			fi; \
+			cd $(ROOTDIR); \
+		fi; \
+	done;
+install: all do_install
+
+do_install:
+	@for dir in $(ROOTDIR); do \
+		if [ -d $$dir ]; then \
+			cd $$dir; make $@; cd $(ROOTDIR); \
+		fi; \
+	done
+
+all:
 	@for subdir in $(SUBDIRS); do \
 		if ! $(MAKE) -C $$subdir -f $(MAKEFILESDIR)/subdir.mk; then \
 			exit 1; \
