@@ -11,10 +11,11 @@ public:
     ~OPDSSimpleParser(){};
     void parse();
     void print_OPDS_tree();
-    std::string parse_user_input(const size_t &idx);
+    std::string parse_user_input(const size_t &idx, const size_t &href_num);
 private:
 	std::string OPDSFile;
-    std::vector <std::pair<std::string, std::string> > OPDS_tree;
+	std::vector <std::string> OPDS_Title_nodes;
+    std::vector <std::vector <std::pair<std::string, std::string> > > OPDS_tree_href;
 };
 
 #endif  /* OPDSSIMPLEPARSER_HPP */

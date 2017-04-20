@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<feed xmlns='http://www.w3.org/2005/Atom'
+	xmlns:dc='http://purl.org/dc/terms/'
+	xmlns:opds='http://opds-spec.org/2010/catalog'
+	xmlns:fbreader='http://data.fbreader.org/catalog/metadata/'
+	xmlns:calibre='http://calibre.kovidgoyal.net/2009/metadata'
+>
+<id>fbreader:books:catalog:v1</id>
+<title>FBReader® book network</title>
+<subtitle>My personal catalogue</subtitle>
+<icon>/static/images/logo-120x120.png</icon>
+<fbreader:search-icon>/static/images/folders-light/search.png</fbreader:search-icon>
+<link type='application/atom+xml' rel='self' href='https://books.fbreader.org/opds' />
+<link type='application/opensearchdescription+xml' rel='search' title='Search FBReader book network' href='https://books.fbreader.org/opensearch.xml'/>
+<!--subtitle>mambo.jambo1133@gmail.com</subtitle-->
+<author><email>mambo.jambo1133@gmail.com</email></author>
+
+<fbreader:view>series</fbreader:view>
+
+
+
+
+
+<entry>
+  <id>fbreader:folder:by_upload_date</id>
+  <title>Books by date of upload</title>
+  
+  <summary>Recently uploaded books shown first</summary>
+  
+  
+  <link href='/opds/by_upload_date' type='application/atom+xml;profile=opds'/>
+  
+  <link href='/static/images/folders-light/by-date.png' type='image/png' rel='http://opds-spec.org/thumbnail'/>
+</entry>
+
+
+
+<entry>
+  <id>fbreader:folder:by_title</id>
+  <title>Books by title</title>
+  
+  <summary>Books ordered alphabetically by title</summary>
+  
+  
+  <link href='/opds/by_title' type='application/atom+xml;profile=opds'/>
+  
+  <link href='/static/images/folders-light/letters.png' type='image/png' rel='http://opds-spec.org/thumbnail'/>
+</entry>
+
+
+
+<entry>
+  <id>fbreader:folder:by_author</id>
+  <title>Books by author</title>
+  
+  <summary>Books ordered alphabetically by author name</summary>
+  
+  
+  <link href='/opds/by_author' type='application/atom+xml;profile=opds'/>
+  
+  <link href='/static/images/folders-light/authors.png' type='image/png' rel='http://opds-spec.org/thumbnail'/>
+</entry>
+
+
+
+
+
+<entry>
+  <id>fbreader:folder:help</id>
+  <title>The book network help</title>
+  
+  <summary>Illustrated guide, F.A.Q., etc.</summary>
+  
+  
+  <link href='/help.html' rel='alternate' type='text/html'/>
+  
+  <link href='/static/images/folders-light/shared.png' type='image/png' rel='http://opds-spec.org/thumbnail'/>
+</entry>
+
+
+
+
+</feed>

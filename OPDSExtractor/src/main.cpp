@@ -15,15 +15,14 @@ int main() {
 	    OPDSSimpleParser parser(content);
 	    parser.parse();
 	    parser.print_OPDS_tree();
-	  	size_t idx;
+	  	size_t idx, href_num;
 	  	std::cin >> idx;
 	  	if (idx == -1){
 	  		fout << content;
 	  		return 0;
 	  	}
-	  	url = mainDomain + parser.parse_user_input(idx - 1);
-	  	std::cout << url << std::endl;
+	  	std::cin >> href_num;
+	  	url = mainDomain + parser.parse_user_input(idx - 1, href_num - 1);
 	}
 	return 0;
-    //fout << content;
 }
