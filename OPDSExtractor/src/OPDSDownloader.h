@@ -6,6 +6,8 @@
 #include <vector> 
 #include <utility> 
 
+const std::string mainDomain = "https://books.fbreader.org";
+
 class OPDSDownloader{
 public:
     OPDSDownloader();

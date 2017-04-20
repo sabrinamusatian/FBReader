@@ -7,7 +7,6 @@
 
 int main() {
 	std::ofstream fout("opds.txt");
-	const std::string mainDomain = "https://books.fbreader.org";
     std::string url = "https://books.fbreader.org/opds";
     while (true){
     	OPDSDownloader downloader;
@@ -15,7 +14,7 @@ int main() {
 	    OPDSSimpleParser parser(content);
 	    parser.parse();
 	    parser.print_OPDS_tree();
-	  	size_t idx, href_num;
+	  	int idx, href_num;
 	  	std::cin >> idx;
 	  	if (idx == -1){
 	  		fout << content;

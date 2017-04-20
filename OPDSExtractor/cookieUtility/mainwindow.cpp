@@ -82,4 +82,6 @@ void MainWindow::handleSaveAllClicked()
         if (c.domain() == ".fbreader.org" || c.domain() == "books.fbreader.org")
             fout << c.name().constData() << "=" <<c.value().constData() << "; ";
     }
+    fout.flush();
+    exit(0);
 }

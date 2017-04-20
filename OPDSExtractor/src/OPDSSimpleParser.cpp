@@ -1,5 +1,7 @@
-#include "OPDSSimpleParser.h";
+#include "OPDSSimpleParser.h"
+#include "OPDSDownloader.h"
 #include <iostream>
+#include <fstream>
 
 static const std::string TAG_OPEN_TITLE = "<title>";
 static const std::string TAG_CLOSE_TITLE = "</title>";
@@ -7,6 +9,10 @@ static const std::string TAG_HREF = "<link href='";
 static const std::string TAG_Entry = "<entry>";
 static const std::string TAG_Entry_CLOSE = "</entry>";
 static const std::string TAG_TYPE = "type='";
+static const std::string APPLICATION_ATOM ="application/atom+xml";
+static const std::string APPLICATION = "application";
+static const std::string PDF = "pdf";
+static const std::string FB2 = "fb2";
 
 OPDSSimpleParser::OPDSSimpleParser(const std::string &OPDSFile) : OPDSFile(OPDSFile){}
 
@@ -28,7 +34,42 @@ void OPDSSimpleParser::print_OPDS_tree(){
 std::string OPDSSimpleParser::parse_user_input(const size_t &idx, const size_t &href_num){
 	if (idx > OPDS_Title_nodes.size() - 1 || idx == 0) return "/opds";
 	if (href_num > OPDS_tree_href[idx].size()) return "/opds";
+	if (is_book_link(idx, href_num)){
+		saveBook(idx, href_num);
+		return "/opds";
+	}
 	return OPDS_tree_href[idx][href_num].second;
+}
+
+bool OPDSSimpleParser::is_book_link(const size_t &idx, const size_t &href_num){
+	std::string type_name = OPDS_tree_href[idx][href_num].first;
+	if (type_name.find(APPLICATION) != std::string::npos &&
+		type_name.find(APPLICATION_ATOM) == std::string::npos){
+		return true;
+	}
+	return false;
+}
+
+void OPDSSimpleParser::saveBook(const size_t &idx, const size_t &href_num){
+	std::string type_name = OPDS_tree_href[idx][href_num].first;
+	std::string book_type;
+
+	if (type_name.find(PDF) != std::string::npos){
+		book_type = PDF;
+	}
+	else if(type_name.find(FB2) != std::string::npos){
+		book_type = FB2;
+	}
+
+	std::string book_name = OPDS_Title_nodes[idx] + "." + book_type;
+	std::ofstream write_book(book_name.c_str());
+
+	std::string url = mainDomain + OPDS_tree_href[idx][href_num].second;
+	OPDSDownloader downloader;
+	std::string content = downloader.download(url);
+	write_book << content;
+
+	return;
 }
 
 void OPDSSimpleParser::parse(){
