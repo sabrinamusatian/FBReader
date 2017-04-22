@@ -27,7 +27,8 @@ class MyTestView : public ZLTextView {
 public:
 	MyTestView(ZLPaintContext &context) 
 		: ZLTextView(context)
-		, myCaption("test") {}
+		, myCaption("test")
+		 {}
 
 	virtual ~MyTestView() {}
 
