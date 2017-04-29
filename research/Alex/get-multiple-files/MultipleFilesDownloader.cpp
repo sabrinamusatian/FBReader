@@ -5,13 +5,21 @@
 #include <sstream>
 #include "json.hpp"
 #include "HTTPDownloader.h"
+#include "AuthorisationManager.h"
 
 using json = nlohmann::json;
 
-void save_to_string(const char * url, std::string& result)
+void save_to_string(void * curl, const char * url, std::string& result)
 {
-  result = HTTPDownloader().download(url);
+  result = HTTPDownloader().download(curl, url);
 }
+
+
+void save_to_string_authorised(void * curl, const char * url, std::string& result)
+{
+  result = HTTPDownloader().download_authorised(curl, url);
+}
+
 
 void get_page(const char* url, const char* file_name)
 {
@@ -19,7 +27,7 @@ void get_page(const char* url, const char* file_name)
 
   // access token is received prior to using this program; to refresh it, use refresh_token from Google
   struct curl_slist *slist=NULL; 
-  slist = curl_slist_append(slist, "Authorization: Bearer ya29.GlsuBPLvLb4IUIzVzCPDoNr4-IYOMcSGno5M-W3tY8-TrCwpvJsj5ZU9uKXwUWe-zT6GcCJ-mJ1Fo3bV7ZTVyccR_-EuSN6G_LhYRzRxMFFSf0kimn4JBcEE4uV5");
+  slist = curl_slist_append(slist, std::string("Authorization: Bearer " + AuthorisationManager::getInstance().getAuthorisationToken()).c_str());
   curl_easy_setopt( easyhandle, CURLOPT_HTTPHEADER, slist);
 
   curl_easy_setopt( easyhandle, CURLOPT_URL, url ) ;
@@ -63,8 +71,12 @@ void find_library(const json& filelist, std::string& id)
 
 int main()
 {
+  AuthorisationManager::getInstance().authorise();
+
   std::string filelist;
-  save_to_string("https://www.googleapis.com/drive/v2/files", filelist);
+  void * curl = curl_easy_init();
+  save_to_string_authorised(curl, "https://www.googleapis.com/drive/v2/files", filelist);
+  curl_easy_cleanup(curl);
   
   json filelist_json = json::parse(filelist);
   std::string id;
@@ -94,5 +106,6 @@ int main()
       }
     }
   }
+
   return 0;
 }
