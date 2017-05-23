@@ -1,7 +1,8 @@
 include $(ROOTDIR)/makefiles/arch/unix.mk
 
 ifeq "$(INSTALLDIR)" ""
-  INSTALLDIR=/usr
+  	INSTALLDIR=/usr
+#	INSTALLDIR=~/opt/FBookshelf
 endif
 IMAGEDIR = $(INSTALLDIR)/share/pixmaps
 APPIMAGEDIR = $(INSTALLDIR)/share/pixmaps/%APPLICATION_NAME%
@@ -10,7 +11,7 @@ CC = ccache gcc
 AR = ar rsu
 LD = g++
 
-CFLAGS = -pipe -fno-exceptions -Wall -Wno-ctor-dtor-privacy -W -DLIBICONV_PLUG
+CFLAGS = -pipe -Wall -Wno-ctor-dtor-privacy -W -DLIBICONV_PLUG --std=c++11
 LDFLAGS =
 
 ifeq "$(UI_TYPE)" "qt"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar>
+	<button id="setBookStackView"/>
+	<button id="setGridView"/>
+	<button id="setWebView"/>
+	<separator/>
+	<button id="signInReloadGoogleDrive"/>
+	<button id="signOutGoogleDrive"/>
+	<separator/>
+	<button id="signInReloadBooksFbreaderOrg"/>
+	<button id="signOutBooksFbreaderOrg"/>
+	<separator/>
+	<button id="showTagMenu"/>
+	<separator/>
+	<toggleButton id="sortByAuthor" group="booksOrder" default="yes"/>
+	<toggleButton id="sortById" group="booksOrder"/>
+	<toggleButton id="sortByTitle" group="booksOrder"/>
+	<separator/>
+	<button id="resizeSmaller"/>
+	<button id="resizeBigger"/>
+	<separator/>
+</toolbar>
